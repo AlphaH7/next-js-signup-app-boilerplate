@@ -55,10 +55,6 @@ body{
   }
 }
 
-/* div{
-  animation: animate-on-load 0.5s ease-out;
-} */
-
 .animate-opacity{
   animation: animate-opacity 0.5s ease-out !important;
   transition: all 3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
