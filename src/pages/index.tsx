@@ -9,11 +9,11 @@ const Index = () => {
   useEffect(() => {
     setTimeout(() => {
       router.push('/signup');
-    }, 3000);
+    }, 5000);
   }, []);
 
   return (
-    <Main>
+    <Main disableAnimation>
       <div className="flex h-full items-center justify-center">
         <div className="flex w-96 flex-col items-center justify-center space-y-4 rounded-2xl pb-12">
           <img

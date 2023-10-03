@@ -7,12 +7,14 @@ import TRUNK from 'vanta/dist/vanta.trunk.min';
 type IMainProps = {
   meta?: ReactNode;
   children: ReactNode;
+  disableAnimation?: boolean;
 };
 
 const Main = (props: IMainProps) => {
   const [vantaEffect, setVantaEffect] = useState(null);
   const [firstLoad, setFirstLoad] = useState<boolean>(false);
   const myRef = useRef(null);
+  const { disableAnimation = false } = props;
   useEffect(() => {
     // As the window object in next JS is not available until load,
     // and is required by p5.js to sketch hence made an import here
@@ -21,6 +23,7 @@ const Main = (props: IMainProps) => {
     if (
       !vantaEffect &&
       myRef.current &&
+      !disableAnimation &&
       window &&
       typeof window !== undefined
     ) {
@@ -41,6 +44,8 @@ const Main = (props: IMainProps) => {
           })
         );
       }, 2000);
+    } else {
+      setFirstLoad(true);
     }
   }, [vantaEffect]);
 
