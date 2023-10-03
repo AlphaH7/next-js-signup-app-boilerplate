@@ -14,10 +14,10 @@ const execAPI = (success: (a: ApiClient) => any, fail?: (e: any) => void) => {
   }
 };
 
-const registerUser = async (programs: any[]): Promise<any> => {
+const registerUser = async (data: any[]): Promise<any> => {
   return execAPI(async (apiClient) => {
     const response = await apiClient.post<any>('/signup', {
-      programs,
+      ...data,
     });
     return response;
   });

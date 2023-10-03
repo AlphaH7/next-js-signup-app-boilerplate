@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Main } from '@/templates/Main';
+import { registerUser } from '@/utils/ApiHelper';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -23,8 +24,8 @@ const Signup = () => {
     e.preventDefault();
 
     // Front-end validations
-    const { email, password, confirmPassword } = formData;
-    if (!email || !password || !confirmPassword) {
+    const { name, email, password, confirmPassword } = formData;
+    if (!email || !password || !confirmPassword || !name) {
       setMessage('All fields are required.');
       return;
     }
@@ -33,19 +34,14 @@ const Signup = () => {
       return;
     }
 
-    // API call
+    console.log(formData);
+
     try {
-      const response = await fetch('/api/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-      setMessage(data.message);
-    } catch (error) {
-      setMessage('An error occurred. Please try again later.');
+      const response = await registerUser(formData);
+      console.log(response);
+      setMessage(response.message);
+    } catch (e: any) {
+      setMessage(e.response.data);
     }
   };
 
