@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Main } from '@/templates/Main';
 import { registerUser } from '@/utils/ApiHelper';
 
+import Toast from './components/Toast';
+
 export interface UserObjectData {
   name: string;
   email: string;
@@ -33,11 +35,11 @@ const Signup = () => {
     // Front-end validations
     const { name, email, password, confirmPassword } = formData;
     if (!email || !password || !confirmPassword || !name) {
-      setMessage('All fields are required.');
+      setMessage('All fields are required.-/-ERROR');
       return;
     }
     if (password !== confirmPassword) {
-      setMessage('Password and Confirm Password do not match.');
+      setMessage('Password and Confirm Password do not match.-/-ERROR');
       return;
     }
 
@@ -46,9 +48,9 @@ const Signup = () => {
     try {
       const response = await registerUser(formData);
       console.log(response);
-      setMessage(response.message);
+      setMessage(`${response.message}-/-SUCCESS`);
     } catch (error: any) {
-      setMessage(error.response.data);
+      setMessage(`${error.response.data}-/-ERROR`);
     }
   };
 
@@ -104,7 +106,14 @@ const Signup = () => {
               Register
             </button>
           </form>
-          {message && <div className="mt-4 text-red-500">{message}</div>}
+          {message && (
+            <Toast
+              {...{
+                message,
+                setMessage,
+              }}
+            />
+          )}
         </div>
       </div>
     </Main>

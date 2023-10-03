@@ -2,7 +2,6 @@ import ApiClient from '@/utils/ApiClient';
 
 export default async function handler(req: any, res: any) {
   try {
-    console.log(req.body, process.env.BACKEND_API_URL, 'api/register');
     const apiClient = new ApiClient();
     apiClient.setUrl(process.env.BACKEND_API_URL);
     const response = await apiClient.post('/register', req.body);
