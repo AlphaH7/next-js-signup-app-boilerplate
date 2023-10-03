@@ -3,8 +3,15 @@ import { useState } from 'react';
 import { Main } from '@/templates/Main';
 import { registerUser } from '@/utils/ApiHelper';
 
+export interface UserObjectData {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 const Signup = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<UserObjectData>({
     name: '',
     email: '',
     password: '',
@@ -40,8 +47,8 @@ const Signup = () => {
       const response = await registerUser(formData);
       console.log(response);
       setMessage(response.message);
-    } catch (e: any) {
-      setMessage(e.response.data);
+    } catch (error: any) {
+      setMessage(error.response.data);
     }
   };
 

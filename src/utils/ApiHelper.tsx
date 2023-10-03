@@ -1,3 +1,5 @@
+import type { UserObjectData } from '@/pages/signup';
+
 import ApiClient from './ApiClient';
 
 const execAPI = (success: (a: ApiClient) => any, fail?: (e: any) => void) => {
@@ -14,9 +16,9 @@ const execAPI = (success: (a: ApiClient) => any, fail?: (e: any) => void) => {
   }
 };
 
-const registerUser = async (data: any[]): Promise<any> => {
+const registerUser = async (data: UserObjectData): Promise<any> => {
   return execAPI(async (apiClient) => {
-    const response = await apiClient.post<any>('/signup', {
+    const response = await apiClient.post<UserObjectData>('/signup', {
       ...data,
     });
     return response;
