@@ -1,3 +1,6 @@
+// this is a functional component in react that
+// uses next router and redirects to signup page
+
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 

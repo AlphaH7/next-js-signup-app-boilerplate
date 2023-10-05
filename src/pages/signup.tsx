@@ -13,15 +13,17 @@ export interface UserObjectData {
 }
 
 const Signup = () => {
+  // states for input fields
   const [formData, setFormData] = useState<UserObjectData>({
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
-
+  // toast message setting and unset
   const [message, setMessage] = useState('');
 
+  // Input field update handler function
   const handleChange = (e: any) => {
     setFormData({
       ...formData,
@@ -29,6 +31,7 @@ const Signup = () => {
     });
   };
 
+  // form submit handler function
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -43,14 +46,14 @@ const Signup = () => {
       return;
     }
 
-    console.log(formData);
-
     try {
+      // calling register middleware api
+      // the middleware api in turn calls the backend node js api
       const response = await registerUser(formData);
       console.log(response);
-      setMessage(`${response.message}-/-SUCCESS`);
+      setMessage(`${response.message}-/-SUCCESS`); // minor hack to detect type of message
     } catch (error: any) {
-      setMessage(`${error.response.data}-/-ERROR`);
+      setMessage(`${error.response.data}-/-ERROR`); // we split the message on -/- that helps us extract the message and type
     }
   };
 

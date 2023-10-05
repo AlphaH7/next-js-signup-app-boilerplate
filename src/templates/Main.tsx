@@ -1,6 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable global-require */
 // @ts-nocheck
+
+// the above disabling for eslint and tscheck have been added
+// as we are implementing vanta that is using p5.js
+// vanta here doesnt have default export hence need to add a skip for eslint check
+// also needed to import p5 on mount (as on line 28)
+
 import { type ReactNode, useEffect, useRef, useState } from 'react';
 import TRUNK from 'vanta/dist/vanta.trunk.min';
 
@@ -13,6 +19,7 @@ type IMainProps = {
 const Main = (props: IMainProps) => {
   const [vantaEffect, setVantaEffect] = useState(null);
   const [firstLoad, setFirstLoad] = useState<boolean>(false);
+  // ref component to pass to vanta js to sketch background
   const myRef = useRef(null);
   const { disableAnimation = false } = props;
   useEffect(() => {
